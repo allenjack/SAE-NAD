@@ -10,7 +10,7 @@ else:
 
 
 class AutoEncoder(torch.nn.Module):
-    def __init__(self, D_in, H, D_out, H1=200, da=20):
+    def __init__(self, D_in, H, D_out, da=20, dropout_rate=0.5):
         """
         Initialize the model configurations and parameters.
         In the model, the network structure is like [D_in, H1, H, H1, D_out], and D_in equals to D_out.
@@ -22,22 +22,25 @@ class AutoEncoder(torch.nn.Module):
         :param da: the dimension of the attention model
         """
         super(AutoEncoder, self).__init__()
+        self.H1 = H[0]
+        self.H = H[1]
+        self.dropout_rate = dropout_rate
         if torch.cuda.is_available():
-            self.linear1 = torch.nn.Linear(D_in, H1, bias=False).cuda()
-            self.linear2 = torch.nn.Linear(H1, H).cuda()
-            self.linear3 = torch.nn.Linear(H, H1).cuda()
-            self.linear4 = torch.nn.Linear(H1, D_out).cuda()
-            self.attention_matrix1 = Variable(torch.zeros(da, H1).type(T.FloatTensor), requires_grad=True)
+            self.linear1 = torch.nn.Linear(D_in, self.H1, bias=False).cuda()
+            self.linear2 = torch.nn.Linear(self.H1, self.H).cuda()
+            self.linear3 = torch.nn.Linear(self.H, self.H1).cuda()
+            self.linear4 = torch.nn.Linear(self.H1, D_out).cuda()
+            self.attention_matrix1 = Variable(torch.zeros(da, self.H1).type(T.FloatTensor), requires_grad=True)
             # self.attention_matrix2 = Variable(torch.zeros(20, 30).type(T.FloatTensor), requires_grad=True)
             self.attention_matrix1 = torch.nn.init.xavier_uniform_(self.attention_matrix1)
             # self.attention_matrix2 = torch.nn.init.xavier_uniform(self.attention_matrix2)
             self.self_attention = torch.nn.Linear(da, 1).cuda()
         else:
-            self.linear1 = torch.nn.Linear(D_in, H1, bias=False)
-            self.linear2 = torch.nn.Linear(H1, H)
-            self.linear3 = torch.nn.Linear(H, H1)
-            self.linear4 = torch.nn.Linear(H1, D_out)
-            self.attention_matrix1 = Variable(torch.zeros(da, H1).type(T.FloatTensor), requires_grad=True)
+            self.linear1 = torch.nn.Linear(D_in, self.H1, bias=False)
+            self.linear2 = torch.nn.Linear(self.H1, self.H)
+            self.linear3 = torch.nn.Linear(self.H, self.H1)
+            self.linear4 = torch.nn.Linear(self.H1, D_out)
+            self.attention_matrix1 = Variable(torch.zeros(da, self.H1).type(T.FloatTensor), requires_grad=True)
             # self.attention_matrix2 = Variable(torch.zeros(20, 30).type(T.FloatTensor), requires_grad=True)
             self.attention_matrix1 = torch.nn.init.xavier_uniform_(self.attention_matrix1)
             # self.attention_matrix2 = torch.nn.init.xavier_uniform(self.attention_matrix2)
@@ -83,11 +86,11 @@ class AutoEncoder(torch.nn.Module):
             linear_z = torch.cat((linear_z, tmp_z), 0)
 
         z = F.tanh(linear_z)
-        z = F.dropout(z, training=self.training)
+        z = F.dropout(z, training=self.training, p=self.dropout_rate)
         z = F.tanh(self.linear2(z))
-        z = F.dropout(z, training=self.training)
+        z = F.dropout(z, training=self.training, p=self.dropout_rate)
         d_z = F.tanh(self.linear3(z))
-        d_z = F.dropout(d_z, training=self.training)
+        d_z = F.dropout(d_z, training=self.training, p=self.dropout_rate)
         y_pred = F.sigmoid(self.linear4(d_z) + neighbor_product)
 
         return y_pred

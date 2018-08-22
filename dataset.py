@@ -19,13 +19,13 @@ class Foursquare(object):
 
         return sparse_raw_matrix.tocsr()
 
-    def split_data(self, raw_matrix):
+    def split_data(self, raw_matrix, random_seed=0):
         train_matrix = sparse.dok_matrix((self.user_num, self.poi_num))
         test_set = []
         for user_id in range(self.user_num):
             place_list = raw_matrix.getrow(user_id).indices
             freq_list = raw_matrix.getrow(user_id).data
-            train_place, test_place, train_freq, test_freq = train_test_split(place_list, freq_list, test_size=0.2, random_state=0)
+            train_place, test_place, train_freq, test_freq = train_test_split(place_list, freq_list, test_size=0.2, random_state=random_seed)
 
             for i in range(len(train_place)):
                 train_matrix[user_id, train_place[i]] = train_freq[i]
@@ -49,9 +49,9 @@ class Foursquare(object):
 
         return place_coords
 
-    def generate_data(self):
+    def generate_data(self, random_seed=0):
         raw_matrix = self.read_raw_data()
-        train_matrix, test_set = self.split_data(raw_matrix)
+        train_matrix, test_set = self.split_data(raw_matrix, random_seed)
         place_coords =self.read_poi_coos()
         return train_matrix, test_set, place_coords
 
