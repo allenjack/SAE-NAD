@@ -1,6 +1,6 @@
 # SAE-NAD
 The implementation of the paper:
-* Chen Ma, Yingxue Zhang, Qinglong Wang, and Xue Liu, "Point-of-Interest Recommendation: Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence", in the 27th ACM International Conference on Information and Knowledge Management (CIKM 2018) *
+*Chen Ma, Yingxue Zhang, Qinglong Wang, and Xue Liu, "Point-of-Interest Recommendation: Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence", in the 27th ACM International Conference on Information and Knowledge Management (CIKM 2018)*
 
 **Please cite our paper if you use our code. Thanks!**
 
