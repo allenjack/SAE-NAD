@@ -30,7 +30,7 @@ Run the *cal_poi_pairwise_relation.py* to calculate the pairwise relations betwe
 python cal_poi_pairwise_relation.py	
 ```
 
-Train and evaluate the model:
+Train and evaluate the model (you are strongly suggested to run the program on a machine with GPU):
 
 ```
 python run.py
