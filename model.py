@@ -19,7 +19,7 @@ class AutoEncoder(torch.nn.Module):
         :param H: the dimension of the bottleneck layer
         :param D_out: the dimension of the output
         :param H1: the dimension of the first hidden layer
-        :param da:
+        :param da: the dimension of the attention model
         """
         super(AutoEncoder, self).__init__()
         if torch.cuda.is_available():
@@ -48,7 +48,7 @@ class AutoEncoder(torch.nn.Module):
         The forward pass of the autoencoder.
         :param batch_item_index: a list of arrays that each array stores the place id a user has been to
         :param place_correlation: the pairwise poi relation matrix
-        :return:
+        :return: the predicted ratings
         """
         item_vector = self.linear1.weight[:, T.LongTensor(batch_item_index[0].astype(np.int32))]
         # Compute the neighbor inner products
