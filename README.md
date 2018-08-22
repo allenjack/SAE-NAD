@@ -1,4 +1,4 @@
-# SAE-NAD
+# The SAE-NAD model for Point-of-Interest Recommendation
 The implementation of the paper:
 
 *Chen Ma, Yingxue Zhang, Qinglong Wang, and Xue Liu, "Point-of-Interest Recommendation: Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence", in the 27th ACM International Conference on Information and Knowledge Management (CIKM 2018)*
@@ -23,6 +23,8 @@ In our experiments, the Foursquare and Yelp datasets are from http://spatialkeyw
 ## Example to run the codes		
 
 Data preprocessing:
+
+Run the *cal_poi_pairwise_relation.py* to calculate the pairwise relations between locations, which is stored in *./data/Foursquare*.
 
 ```
 python cal_poi_pairwise_relation.py	
