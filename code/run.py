@@ -3,9 +3,8 @@ import heapq
 import numpy as np
 import scipy
 
-import eval_metrics
-import dataset
-from model import AutoEncoder
+from code import dataset, eval_metrics
+from code.model import AutoEncoder
 
 import torch
 from torch.autograd import Variable
