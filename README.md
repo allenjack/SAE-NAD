@@ -24,7 +24,7 @@ In our experiments, the Foursquare and Yelp datasets are from http://spatialkeyw
 
 Data preprocessing:
 
-Run the ```cal_poi_pairwise_relation.py``` to calculate the pairwise relations between locations, which will be stored in ```./data/Foursquare/```.
+Run the ```cal_poi_pairwise_relation.py``` to calculate the pairwise relations between locations, which is stored in ```./data/Foursquare/```.
 
 ```
 python cal_poi_pairwise_relation.py	
