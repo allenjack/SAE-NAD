@@ -37,7 +37,7 @@ Author: Chen Ma (allenmc1230@gmail.com)
 
 In our experiments, the Foursquare and Yelp datasets are from http://spatialkeyword.sce.ntu.edu.sg/eval-vldb17/. And the Gowalla dataset is from https://snap.stanford.edu/data/loc-gowalla.html (if you need the data after preprocessing, please send me an email).
 
-## Example to run the codes		
+## Example to run the code
 
 Data preprocessing:
 
