@@ -16,8 +16,7 @@ Author: Chen Ma (allenmc1230@gmail.com)
                Yingxue Zhang and
                Qinglong Wang and
                Xue Liu},
-  title     = {Point-of-Interest Recommendation: Exploiting Self-Attentive Autoencoders
-               with Neighbor-Aware Influence},
+  title     = {Point-of-Interest Recommendation: Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence},
   booktitle = {{CIKM}},
   pages     = {697--706},
   publisher = {{ACM}},
